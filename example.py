@@ -1,34 +1,64 @@
-from brukeropusreader import read_file
+#!/usr/bin/env python
+# coding: utf-8
 
-import sys
-import argparse
-import matplotlib.pyplot as plt
+# ## test object
 
-
-def main(path_to_file):
-    print(f'Reading opus file from path'
-          f'{path_to_file}')
-    opus_data = read_file(path_to_file)
-
-    print(f'Dimension of data: '
-          f'{len(opus_data.wave_nums)}')
-
-    print(f'Spectrum range: ['
-          f'{min(opus_data.spectrum)}; '
-          f'{max(opus_data.spectrum)}]')
-
-    print(f'Metadata: '
-          f'{opus_data.meta}')
-
-    plt.plot(opus_data.wave_nums, opus_data.spectrum)
-    plt.title(f'Spectrum {path_to_file}')
-    plt.show()
+# In[16]:
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("opus_path",
-                        help="Path to opus file",
-                        action="store")
-    args = parser.parse_args()
-    main(sys.argv[1])
+from bruker_load import Wave
+
+
+# In[17]:
+
+
+root="./sample_data"
+wave_object=Wave(root)
+
+
+# In[19]:
+
+
+# list names of files
+wave_object.list_names()
+
+
+# In[20]:
+
+
+## save file as csv
+wave_object.to_csv('csv_test')
+
+
+# In[21]:
+
+
+#load csv file
+wave_object.load_csv('./csv_test')
+
+
+# In[22]:
+
+
+# list names of files
+wave_object.list_names()
+
+
+# In[24]:
+
+
+# plot chart of file (matplotlibb)
+wave_object.plot('Fish Meal - RM_M359_12062019_MIX3_20190612_170936')
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
